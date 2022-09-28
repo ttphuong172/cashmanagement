@@ -1,0 +1,67 @@
+<h3>Add New Student</h3>
+<form [formGroup]="studentForm">
+  <div class="row" style="margin-bottom: 5px">
+    <div class="col-3">
+      <label>Student Code</label>
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" formControlName="id">
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 5px">
+    <div class="col-3">
+      <label> Student Name</label>
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" formControlName="fullName">
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 5px">
+    <div class="col-3">
+      <label>Date of Birth</label>
+    </div>
+    <div class="col-9">
+      <input type="date" class="form-control" formControlName="dateOfBirth">
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 5px">
+    <div class="col-3">
+      <label>Gender</label>
+    </div>
+    <div class="col-9">
+      <select class="form-control" formControlName="gender">
+        <option value="">Choose a gender</option>
+        <option *ngFor="let gender of genderList" [value]="gender">{{gender}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 5px">
+    <div class="col-3">
+      <label>Campus</label>
+    </div>
+    <div class="col-9">
+      <select class="form-control" formControlName="campus">
+        <option value="">Choose a campus</option>
+        <option *ngFor="let campus of campusList" [ngValue]="campus">{{campus.name}}</option>
+      </select>
+    </div>
+  </div>
+
+</form>
+
+<div class="row" style="margin-top: 20px">
+  <div class="col-md-2"></div>
+  <div class="col-md-2"></div>
+  <div class="col-md-2"></div>
+  <div class="col-md-2"></div>
+  <div class="col-md-2" style="padding-bottom: 20px">
+    <button class="btn btn-outline-dark" style="width: 100%" (click)="cancel()">Cancel</button>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary" style="width: 100%" (click)="save()">Save</button>
+  </div>
+
+</div>
+
+{{studentForm.value | json}}

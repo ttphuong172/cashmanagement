@@ -1,0 +1,87 @@
+<h3>Detail of Student</h3>
+<a routerLink="/student">List of Student</a>
+<div *ngIf="student">
+  <div class="row">
+    <div class="col-3">
+      <label>Student Code</label>
+    </div>
+    <div class="col-9">
+      <label>{{student.id}}</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <label>Student FullName</label>
+    </div>
+    <div class="col-9">
+      <label>{{student.fullName}}</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <label>Date Of Birth</label>
+    </div>
+    <div class="col-9">
+      <label>{{student.dateOfBirth}}</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <label>Gender</label>
+    </div>
+    <div class="col-9">
+      <label>{{student.gender}}</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <label>Campus</label>
+    </div>
+    <div class="col-9">
+      <label>{{student.campus.name}}</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <label>List of CollectStudent</label>
+
+
+    </div>
+    <div class="col-9">
+      <div>
+        <span class="count" *ngFor="let collectStudent of collectStudentMap | keyvalue">
+        <span style="font-weight: bold">{{collectStudent.key}}</span>: {{collectStudent.value}} <br>
+      </span>
+      </div>
+      <button  [routerLink]="['/collectstudent/add/' + student.id]">Add New CollectStudent</button>
+      <table class="table table-bordered">
+        <thead>
+          <th>Collect Day</th>
+          <th>Scholastic</th>
+          <th>Collect List</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let collectStudent of student.collectStudentList">
+            <td>{{collectStudent.collectDay}}</td>
+            <td>{{collectStudent.scholastic.name}}</td>
+            <td>
+              <span *ngFor="let collect of collectStudent.collectList">{{collect.revenue.name}}: {{collect.amount | number}} {{collect.currency + ", "}}</span>
+            </td>
+            <td>
+              <button [routerLink]="['/collectstudent/edit/' + collectStudent.id]" style="margin-right: 5px">Edit</button>
+              <button (click)="openDialogDelete(collectStudent.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>

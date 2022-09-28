@@ -1,0 +1,28 @@
+<h3>List of CollectStudent</h3>
+<table class="table table-bordered">
+  <thead>
+    <th>ID</th>
+    <th>Student ID</th>
+    <th>Student FullName</th>
+    <th>Collect Day</th>
+    <th>Scholastic</th>
+    <th>Collect</th>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let collectStudent of collectStudentList">
+      <td>{{collectStudent.id}}</td>
+      <td>{{collectStudent.student.id | lowercase}}</td>
+      <td>{{collectStudent.student.fullName}}</td>
+      <td>{{collectStudent.collectDay}}</td>
+      <td>{{collectStudent.scholastic.name}}</td>
+      <td>
+        <span *ngFor="let collect of collectStudent.collectList">
+          {{collect.revenue.name}}: {{collect.amount}} {{collect.currency}}
+        </span>
+      </td>
+
+
+    </tr>
+  </tbody>
+</table>

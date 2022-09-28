@@ -1,0 +1,129 @@
+<h3>Edit CollectStudent</h3>
+<form [formGroup]="collectStudentForm">
+  <div class="row">
+    <div class="col-8">
+      <div class="row" style="margin-bottom: 5px">
+        <div class="col-3">
+          <label>Student ID</label>
+        </div>
+        <div class="col-9">
+          <input type="text" class="form-control" (keyup.enter)="searchStudent($event)" [value]="this.student!=null ? this.student.id:''">
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px">
+        <div class="col-3">
+          <label>Collect Day</label>
+        </div>
+        <div class="col-9">
+          <input type="date" class="form-control" formControlName="collectDay">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-3">
+          <label>Scholastic</label>
+        </div>
+        <div class="col-9">
+          <select class="form-control" formControlName="scholastic" [compareWith]="compareByID">
+            <option>Choose a cholastic</option>
+            <option *ngFor="let scholastic of scholasticList" [ngValue]="scholastic">{{scholastic.name}}</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-4">
+      <div class="row">
+        <div class="col-3" style="background-color: gray;height: 120px; display: flex; justify-content: center;align-items: center">
+          <div>
+            <img src="" alt="" style="width: 100%">
+          </div>
+
+        </div>
+        <div *ngIf="student" class="col-9" style="text-align: center">
+          <h4>{{student.fullName}}</h4>
+          <h5>{{student.dateOfBirth}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label>Collect</label>
+    </div>
+    <div class="col-10">
+      <div formArrayName="collectList" *ngFor="let _ of collectStudentForm.get('collectList').controls; let i = index;">
+        <div [formGroupName]="i" class="row" style="margin-top: 10px">
+
+          <div class="col-1">
+            <label>Revenue</label>
+          </div>
+
+          <div class="col-2">
+            <select class="form-control" formControlName="revenue" [compareWith]="compareByID">
+              <option *ngFor="let revenue of revenueList" [ngValue]="revenue">{{revenue.name}}</option>
+            </select>
+          </div>
+
+          <div class="col-1">
+            <label>Amount</label>
+          </div>
+          <div class="col-2">
+            <input type="text" class="form-control" formControlName="amount">
+          </div>
+          <div class="col-1">
+            <label>Currency</label>
+          </div>
+          <div class="col-2">
+            <select class="form-control" formControlName="currency">
+              <option value="">Choose a currency</option>
+              <option *ngFor="let currency of currencyList" [value]="currency">{{currency}}</option>
+            </select>
+          </div>
+
+          <div class="col-1">
+            <button (click)="removeCollect(i)" class="btn btn-danger" style="width: 100%">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-2"></div>
+    <div class="col-10">
+      <div class="col-md-2"></div>
+      <div class="col-md-2" style="padding: 0">
+        <button style="width: 100%" class="btn btn-primary" (click)="addCollect()">Add</button>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</form>
+
+<div class="row" style="margin-top: 20px">
+  <div class="col-md-2"></div>
+  <div class="col-md-2"></div>
+  <div class="col-md-2"></div>
+  <div class="col-md-2"></div>
+  <div class="col-md-2" style="padding-bottom: 20px">
+    <button class="btn btn-outline-dark" style="width: 100%" (click)="cancel()">Cancel</button>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary" style="width: 100%" (click)="update()">Update</button>
+  </div>
+
+</div>
+
+{{collectStudentForm.value | json}}
+
+
+

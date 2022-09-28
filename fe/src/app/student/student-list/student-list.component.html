@@ -1,0 +1,27 @@
+<h3>List of Student</h3>
+<button routerLink="add" style="margin-top: 10px;margin-bottom: 10px">New Student</button>
+<table class="table table-bordered">
+  <thead>
+  <th>Order</th>
+  <th>ID</th>
+  <th>FullName</th>
+  <th>Date of Birth</th>
+  <th>Gender</th>
+  <th>Campus</th>
+  <th>Action</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let student of studentList, index as i">
+    <td>{{i+1}}</td>
+    <td>{{student.id}}</td>
+    <td>{{student.fullName}}</td>
+    <td>{{student.dateOfBirth}}</td>
+    <td>{{student.gender}}</td>
+    <td>{{student.campus.name}}</td>
+    <td>
+      <button [routerLink]="['edit/' + student.id]" style="margin-right: 5px">Edit</button>
+      <button [routerLink]="['detail/' + student.id]" style="margin-right: 5px">Detail</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
